@@ -1,0 +1,42 @@
+Converting the outcome variable to a factor
+```{r}
+# Create a copy of the original dataset
+trainData_modified <- trainData
+
+# Convert the outcome variable to a factor
+trainData_modified$y <- as.factor(trainData_modified$y)
+```
+
+Train Various Models
+```{r}
+# Train logistic regression
+logistic_model <- train(y ~ ., data = trainData_modified, method = "glm", family = "binomial")
+```
+
+```{r}
+# Train random forest
+rf_model <- train(y ~ ., data = trainData_modified, method = "rf")
+```
+
+```{r}
+# Train support vector machine
+svm_model <- train(y ~ ., data = trainData_modified, method = "svmRadial")
+```
+
+Evaluate Model Performance
+```{r}
+# Predictions for logistic regression
+logistic_predictions <- predict(logistic_model, newdata = testData)
+logistic_accuracy <- mean(logistic_predictions == testData$y)
+print(paste("Logistic Regression Accuracy:", logistic_accuracy))
+
+# Predictions for random forest
+rf_predictions <- predict(rf_model, newdata = testData)
+rf_accuracy <- mean(rf_predictions == testData$y)
+print(paste("Random Forest Accuracy:", rf_accuracy))
+
+# Predictions for support vector machine
+svm_predictions <- predict(svm_model, newdata = testData)
+svm_accuracy <- mean(svm_predictions == testData$y)
+print(paste("Support Vector Machine Accuracy:", svm_accuracy))
+```
