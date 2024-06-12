@@ -38,12 +38,8 @@ cd your-repository
 - Run `data_processing.R` to load and preprocess the dataset.
 - Run `feature_extraction.R` to extract median RGB values and intensity from images.
 
-2. **Model Training and Evaluation:**
-- Run `model_training.R` to train machine learning models (logistic regression, random forest, SVM).
-- Run `model_evaluation.R` to evaluate model performance and generate metrics.
-
-3. **Interpreting Results:**
-- Review model accuracy, confusion matrices, and other metrics in `model_evaluation.R`.
+2. **Model Training:**
+- Run `model.Rmd` and `advancedModels.Rmd`  to train machine learning models (logistic regression, random forest, SVM).
 
 #### Conclusion
 
