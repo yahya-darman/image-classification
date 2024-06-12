@@ -1,0 +1,53 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+# Load necessary libraries
+library(jpeg)
+library(dplyr)  # For data manipulation
+
+# Read metadata
+pm <- read.csv("//Users//workingyahya//Documents//MATH3333 Project//photoMetaData.csv")
+n <- nrow(pm)
+
+# Initialize matrices
+X <- matrix(NA, ncol = 4, nrow = n)  # Increase ncol to 4 for additional column
+
+# Process each image
+for (j in 1:n) {
+  img <- readJPEG(paste0("//Users//workingyahya//Documents//MATH3333 Project//columbiaImages//", pm$name[j]))
+  
+  # Calculate median RGB values
+  medRGB <- apply(img, 3, median)
+  
+  # Calculate median intensity (example: using sum of pixel values)
+  medIntensity <- sum(img) / (dim(img)[1] * dim(img)[2])  # Example: sum of pixel values divided by total pixels
+  
+  # Store data
+  X[j, ] <- c(medRGB, medIntensity)  # Store median RGB and median intensity
+  
+  print(sprintf("%03d / %03d", j, n))
+}
+
+# Convert category to numeric
+y <- as.numeric(pm$category == "outdoor-day")
+
+# Combine predictors with target variable
+data <- data.frame(y, X)
+```
+Prepare Data
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(caret)  # For modeling functions
+
+# Assuming 'data' dataframe is created as per your code
+
+# Split data into training and testing sets
+set.seed(123)  # for reproducibility
+trainIndex <- createDataPartition(data$y, p = 0.7, list = FALSE)
+trainData <- data[trainIndex, ]
+testData <- data[-trainIndex, ]
+```

@@ -1,0 +1,30 @@
+Train a Classification Model
+```{r}
+# Train a logistic regression model
+model <- glm(y ~ ., data = trainData, family = "binomial")
+
+# Print model summary
+summary(model)
+```
+Evaluate Model Performance
+```{r}
+# Predict on test data
+predictions <- predict(model, newdata = testData, type = "response")
+
+# Convert probabilities to class predictions (0 or 1)
+predicted_classes <- ifelse(predictions > 0.5, 1, 0)
+
+# Confusion matrix
+confusionMatrix(table(predicted_classes, testData$y))
+
+# Accuracy
+accuracy <- mean(predicted_classes == testData$y)
+print(paste("Accuracy:", accuracy))
+
+```
+Model Interpretation
+```{r}
+# Coefficients
+coef(model)
+```
+
