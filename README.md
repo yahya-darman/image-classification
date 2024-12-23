@@ -1,6 +1,6 @@
 ### Project Description
 
-**Title:** Outdoor Photo Classification Using Image Features
+**Title:** R Project; Outdoor Photo Classification Using Image Features
 
 **Description:**
 This project aims to classify whether a photo was taken outdoors or not based on extracted image features. The features used include median RGB values and median intensity calculated from images. The classification task is approached using machine learning techniques, specifically logistic regression, random forest, and support vector machine (SVM). The dataset consists of metadata and image features extracted from photos, with the target variable indicating whether each photo was taken outdoors during the day.
